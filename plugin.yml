@@ -1,0 +1,12 @@
+name: KeyBinds
+main: uk.co.speshkittyonline.keyBinds.KeyBinds
+version: 1
+depend: [Spout]
+author: Sir_Speshkitty
+commands:
+    bind:
+        description: Manages your keybinds
+        usage: |
+            /bind set <letter> <command>
+            /bind remove <letter>
+            /bind show [letter]
