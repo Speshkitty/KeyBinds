@@ -10,6 +10,8 @@ import org.bukkit.event.Event;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.getspout.spoutapi.event.input.InputListener;
 import org.getspout.spoutapi.event.input.KeyReleasedEvent;
+import org.getspout.spoutapi.gui.Screen;
+import org.getspout.spoutapi.gui.ScreenType;
 import org.getspout.spoutapi.keyboard.Keyboard;
 import org.getspout.spoutapi.player.SpoutPlayer;
 
@@ -30,13 +32,13 @@ public class KeyBinds extends JavaPlugin
 			{
 				public void onKeyReleasedEvent(KeyReleasedEvent event)
 				{
+					Screen playerScreen = event.getPlayer().getCurrentScreen();
+					if(playerScreen.getScreenType() != ScreenType.GAME_SCREEN) { return; }
+					
 					SpoutPlayer player = event.getPlayer();
 					String command = getConfig().getString(player.getPlayerListName() + "." + event.getKey(), "");
 					
-					if(!command.equalsIgnoreCase("")) // that key has a command
-					{
-						player.chat(command);
-					}
+					if(!command.equalsIgnoreCase("")) { player.chat(command); }
 				}
 			},
 		Event.Priority.Normal, this);
