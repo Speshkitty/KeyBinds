@@ -1,7 +1,6 @@
 name: KeyBinds
 main: uk.co.speshkittyonline.keyBinds.KeyBinds
 version: 1
-depend: [Spout]
 author: Sir_Speshkitty
 commands:
     bind:

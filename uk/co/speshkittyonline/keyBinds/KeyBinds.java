@@ -7,6 +7,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
+import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.getspout.spoutapi.event.input.InputListener;
 import org.getspout.spoutapi.event.input.KeyReleasedEvent;
@@ -17,17 +18,19 @@ import org.getspout.spoutapi.player.SpoutPlayer;
 
 public class KeyBinds extends JavaPlugin
 {
-	
+	private static PluginManager pm;
 	@Override
 	public void onDisable()
 	{
-		getServer().getLogger().log(Level.INFO, "Keybinding disabled!");
+		Log("Keybinding disabled!");
 	}
 
 	@Override
 	public void onEnable()
 	{
-		getServer().getPluginManager().registerEvent(Event.Type.CUSTOM_EVENT, 
+		pm = getServer().getPluginManager();
+		if(pm.getPlugin("Spout") == null) { Log(Level.SEVERE, "[KeyBinds] This plugin needs Spout to run!"); pm.disablePlugin(this); return; }
+		pm.registerEvent(Event.Type.CUSTOM_EVENT, 
 			new InputListener()
 			{
 				public void onKeyReleasedEvent(KeyReleasedEvent event)
@@ -42,7 +45,7 @@ public class KeyBinds extends JavaPlugin
 				}
 			},
 		Event.Priority.Normal, this);
-		getServer().getLogger().log(Level.INFO, "Keybinding enabled!");
+		Log("Keybinding enabled!");
 	}
 
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) 
@@ -179,4 +182,7 @@ public class KeyBinds extends JavaPlugin
 			player.sendMessage(ChatColor.RED + "Example usage:" + ChatColor.DARK_RED + " /bind show g");
 		}
 	}
+
+	protected void Log(String message) { Log(Level.INFO, message); }
+	protected void Log(Level level, String message) { getServer().getLogger().log(level, message); }
 }
