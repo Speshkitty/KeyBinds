@@ -2,6 +2,8 @@ name: KeyBinds
 main: uk.co.speshkittyonline.keyBinds.KeyBinds
 version: 1
 author: Sir_Speshkitty
+depend: [Spout]
+description: Lets you bind commands to keypresses
 commands:
     bind:
         description: Manages your keybinds

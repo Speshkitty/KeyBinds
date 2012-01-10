@@ -29,7 +29,6 @@ public class KeyBinds extends JavaPlugin
 	public void onEnable()
 	{
 		pm = getServer().getPluginManager();
-		if(pm.getPlugin("Spout") == null) { Log(Level.SEVERE, "[KeyBinds] This plugin needs Spout to run!"); pm.disablePlugin(this); return; }
 		pm.registerEvent(Event.Type.CUSTOM_EVENT, 
 			new InputListener()
 			{
